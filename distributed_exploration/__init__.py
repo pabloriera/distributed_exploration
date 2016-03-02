@@ -19,7 +19,7 @@ def chunks(L, n):
 def explore_thread(function,arg_dict,nthreads=1,postpro=None):
 
     """
-    function would be called like function(**arguments), with arguments been made from arg_dict
+    The function should be called as function(**arguments), with arguments been made from arg_dict
     postpro function could be passes to executed with the output of function
     """
     
