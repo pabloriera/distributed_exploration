@@ -39,24 +39,28 @@ def explore_thread(function,arg_dict,nthreads=1,postpro=None):
             
             for j in jj:
                 
+               
                 arguments = {key:val[j] for key,val in arg_dict.iteritems() }
                             
                 X = function( **arguments )
                 
-                arguments['ix']=j
+                resp = {}
+                resp['args'] = arguments
+                resp['ix']=j
 
                 if postpro:
-                    arguments['out']= postpro(X)
+                    resp['out']= postpro(X)
                 else:
-                    arguments['out']= X
+                    resp['out']= X
                 
-                responses.append(arguments)
+                responses.append(resp)
 
     if nthreads>nvalues:
         nthreads = nvalues
-        
+
+
     chunks_list = chunks( range(nvalues),nthreads )
-    
+ 
     thr = range(nthreads)
     for k in xrange(nthreads):
         jj = chunks_list[k]
